@@ -1,0 +1,36 @@
+﻿@using CW.MoviesList.Web.Models
+@using CW.MoviesList.Web.Helpers
+@model MovieItem
+@{
+    //Layout = null;
+    ViewBag.Title = Model.title;
+    Model.budget_string = Model.budget > 0 ? Convert.ToString(Model.budget / 1000) + "K" : "NA";
+    string revenue = Model.revenue > 0 ? Convert.ToString(Model.revenue / 1000) + "K" : "NA";
+    string adultFilmString = Model.adult ? "Yes" : "No";
+    string[] prod_companies = Model.production_companies.Select(x => x.name).ToArray();
+    string companies = prod_companies.Length > 0 ? String.Join(",", prod_companies) : "NA";
+}
+
+<div>
+    <div class="card">
+        <img height="400" width="750" src="@CommonHelper.GetFullSource(Model.poster_path)" class="figure-img img-fluid rounded" alt="...">
+        <div class="card-body">
+            <h2 class="card-title">@Model.original_title - @Model.tagline (@Model.runtime mins) </h2>
+            <h5>Relase date - <b>@Model.release_date</b></h5>
+            <p class="card-text">@Model.overview</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Budget  - @Model.budget_string</li>
+            <li class="list-group-item">Revenue  - @revenue</li>
+            <li class="list-group-item">Produced by  - @companies</li>
+            <li class="list-group-item">Rating  - @Model.vote_average</li>
+            <li class="list-group-item">Popularity  - @Model.popularity</li>
+            <li class="list-group-item">Voters  - @Model.vote_count</li>
+            <li class="list-group-item">Contains Adult content  - @adultFilmString</li>
+        </ul>
+        <div class="card-body">
+            <a href="@Model.homepage" class="card-link" target="_blank">Movie Home Page</a>
+        </div>
+    </div>
+</div>
+

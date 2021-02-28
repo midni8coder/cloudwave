@@ -1,0 +1,33 @@
+﻿@using CW.MoviesList.Web.Models
+@using CW.MoviesList.Web.Helpers
+@model SearchResult
+@{
+    //ViewBag.Title = "GetMoviesByName";
+    Layout = "";
+
+}
+
+
+@if (Model.results.Count > 0)
+{
+    <h2>Search Results</h2>
+    foreach (var movie in Model.results)
+    {
+        <div style="border-color:lightpink;border-radius:10px;border-style:dotted" class="col-md-4">
+            <div class="card" onclick="GetMovieDetailsByID('@movie.id')" style="cursor:pointer">
+                <img class="card-img-top" src="@CommonHelper.GetFullSource(movie.poster_path)" width="150" height="150" alt="Card image cap">
+                <div class="card-body">
+                    <h2 class="card-title">@movie.original_title </h2>
+                    <p>Rating - <b> @movie.vote_average</b></p>
+                    <p class="card-text">@movie.overview</p>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div><h3>--No Results found--</h3></div>
+}
+
+
