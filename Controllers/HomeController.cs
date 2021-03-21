@@ -42,6 +42,7 @@ namespace CW.MoviesList.Web.Controllers
             {
                 using (var client = new HttpClient())
                 {
+
                     client.BaseAddress = new Uri("https://api.themoviedb.org/3/");
                     client.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse($"Bearer {api_auth_token}");
 
